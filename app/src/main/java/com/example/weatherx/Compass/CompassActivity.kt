@@ -33,15 +33,8 @@ class CompassActivity : AppCompatActivity(), SensorEventListener {
         magnetometer = sensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD)
         compass = findViewById(R.id.compass)
 
-        if (magnetometer == null) {
-            // Obsługa braku dostępu do magnetometru
-            // Dodaj odpowiednie działania w przypadku braku magnetometru
-        }
-
-        // Rozpoczęcie nasłuchiwania na zmiany kierunku
         sensorManager.registerListener(this, magnetometer, SensorManager.SENSOR_DELAY_NORMAL)
 
-        // Inicjalizacja BottomNavigationView
         bottomNavigationView = findViewById(R.id.bottom_navigation)
 
         bottomNavigationView.setOnNavigationItemSelectedListener { item ->
@@ -55,7 +48,7 @@ class CompassActivity : AppCompatActivity(), SensorEventListener {
                     true
                 }
                 R.id.compass -> {
-                    // Nie rób nic, już jesteś w CompassActivity
+                    // Jestes w opcji kompasu
                     true
                 }
                 R.id.flashlight -> {
@@ -69,7 +62,6 @@ class CompassActivity : AppCompatActivity(), SensorEventListener {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            // Obsługa kliknięcia w element menu (jeśli wymagane)
         }
         return super.onOptionsItemSelected(item)
     }
@@ -79,7 +71,6 @@ class CompassActivity : AppCompatActivity(), SensorEventListener {
             val azimuth = Math.toDegrees(event.values[0].toDouble()).toFloat()
             val rotateAnimation = AnimationUtils.loadAnimation(this, R.anim.rotation_animation)
 
-            // Poprawka: Ustawianie animacji i rotacji na ImageView
             compass.startAnimation(rotateAnimation)
             rotateAnimation.fillAfter = true
             compass.rotation = -azimuth
@@ -87,18 +78,16 @@ class CompassActivity : AppCompatActivity(), SensorEventListener {
     }
 
     override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {
-        // Nie jesteśmy zainteresowani dokładnością w tym przypadku
+        // Dokładność sensora
     }
 
     override fun onResume() {
         super.onResume()
-        // Wznawianie nasłuchiwania sensora po wznowieniu aktywności
         sensorManager.registerListener(this, magnetometer, SensorManager.SENSOR_DELAY_NORMAL)
     }
 
     override fun onPause() {
         super.onPause()
-        // Zatrzymywanie nasłuchiwania sensora po zatrzymaniu aktywności
         sensorManager.unregisterListener(this)
     }
 }

@@ -48,14 +48,13 @@ class FlashlightActivity : AppCompatActivity() {
                     true
                 }
                 R.id.flashlight -> {
-                    // Jesteś już w sekcji Flashlight, możesz dodać odpowiednie działania
+                    // Jesteś w opcji Latarki
                     true
                 }
                 else -> false
             }
         }
     }
-
 
     @RequiresApi(Build.VERSION_CODES.M)
     private fun flashLightOnOrOff(v: View?) {
