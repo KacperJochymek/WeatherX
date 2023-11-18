@@ -1,12 +1,11 @@
 package com.example.weatherx
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
 import android.widget.Button
 import android.widget.EditText
-import com.example.weatherx.R
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 
 class MainActivity : AppCompatActivity() {
 
@@ -26,17 +25,16 @@ class MainActivity : AppCompatActivity() {
             val username = etUsername.text.toString().trim()
             val password = etPassword.text.toString().trim()
 
-            if (username.isEmpty()) {
-                etUsername.error = "Podaj login"
-                etUsername.requestFocus()
-            } else if (password.isEmpty()) {
-                etPassword.error = "Wprowadz haslo"
-                etPassword.requestFocus()
-            } else {
+            if (username == "admin" && password == "admin") {
+                // Poprawne logowanie
                 val intent = Intent(this, MainActivity2::class.java)
                 startActivity(intent)
                 finish()
+            } else {
+                // Nieprawidłowe dane logowania
+                Toast.makeText(this, "Nieprawidłowy login lub hasło", Toast.LENGTH_SHORT).show()
             }
         }
     }
 }
+
