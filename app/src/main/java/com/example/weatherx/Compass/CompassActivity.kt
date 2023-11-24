@@ -10,6 +10,7 @@ import android.os.Bundle
 import android.view.MenuItem
 import android.view.animation.AnimationUtils
 import android.widget.ImageView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.weatherx.Calendar.CalendarActivity
 import com.example.weatherx.FlashlightActivity
@@ -31,6 +32,12 @@ class CompassActivity : AppCompatActivity(), SensorEventListener {
         // Inicjalizacja sensorów
         sensorManager = getSystemService(Context.SENSOR_SERVICE) as SensorManager
         magnetometer = sensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD)
+
+        // Sprawdzenie czy telefon ma wbudowany sensor
+        if (magnetometer == null) {
+            Toast.makeText(this, "Brak sensora kompasu na tym urządzeniu.", Toast.LENGTH_SHORT).show()
+        }
+
         compass = findViewById(R.id.compass)
 
         sensorManager.registerListener(this, magnetometer, SensorManager.SENSOR_DELAY_NORMAL)

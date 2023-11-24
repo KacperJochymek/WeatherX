@@ -28,6 +28,8 @@ class CalendarActivity : AppCompatActivity() {
         btnDatePicker = findViewById(R.id.btnDatePicker)
 
         val myCalendar = Calendar.getInstance()
+
+        // Aktywacja, wybranej daty
         val datePicker =
             DatePickerDialog.OnDateSetListener { _, year, month, dayOfMonth ->
                 myCalendar.set(Calendar.YEAR, year)
@@ -69,6 +71,7 @@ class CalendarActivity : AppCompatActivity() {
         }
     }
 
+    // Aktualizacja daty
     private fun updateLabel(myCalendar: Calendar) {
         val myFormat = "dd-MM-yyyy"
         val sdf = SimpleDateFormat(myFormat, Locale.ENGLISH)

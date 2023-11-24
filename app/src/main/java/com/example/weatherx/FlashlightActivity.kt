@@ -56,6 +56,7 @@ class FlashlightActivity : AppCompatActivity() {
         }
     }
 
+    // Metoda do włączania/wyłączania latarki
     @RequiresApi(Build.VERSION_CODES.M)
     private fun flashLightOnOrOff(v: View?) {
 

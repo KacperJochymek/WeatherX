@@ -20,6 +20,7 @@ import java.util.Locale
 
 class MainActivity2 : AppCompatActivity() {
 
+    // Podpięcie pod API
     val CITY: String = "Rzeszów, pl"
     val API: String = "06c921750b9a82d8f5d1294e1586276f"
 
@@ -70,6 +71,7 @@ class MainActivity2 : AppCompatActivity() {
             findViewById<TextView>(R.id.errortext).visibility = View.GONE
         }
 
+        //Pobieranie informacji o pogodzie
         override fun doInBackground(vararg p0: String?): String? {
             var response:String?
             try{
@@ -86,6 +88,7 @@ class MainActivity2 : AppCompatActivity() {
         override fun onPostExecute(result: String?) {
             super.onPostExecute(result)
             try{
+                // Aktualizacja widoków o pobrane dane z API
                 val jsonObj = JSONObject(result)
                 val main = jsonObj.getJSONObject("main")
                 val sys = jsonObj.getJSONObject("sys")
