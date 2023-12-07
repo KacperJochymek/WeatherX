@@ -65,7 +65,10 @@ class CompassActivity : AppCompatActivity(), SensorEventListener {
                 else -> false
             }
         }
+
+        bottomNavigationView.menu.findItem(R.id.compass).isChecked = true
     }
+
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {

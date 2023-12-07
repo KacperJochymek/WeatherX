@@ -54,8 +54,12 @@ class MainActivity2 : AppCompatActivity() {
             }
         }
 
+        // Ustawienie aktywnej ikony
+        bottomNavigationView.menu.findItem(R.id.home).isChecked = true
+
         weatherTask().execute()
     }
+
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.bottom_nav, menu)

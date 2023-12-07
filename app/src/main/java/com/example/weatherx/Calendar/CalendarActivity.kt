@@ -69,7 +69,11 @@ class CalendarActivity : AppCompatActivity() {
                 else -> false
             }
         }
+
+        // Ustawienie aktywnej ikony
+        bottomNavigationView.menu.findItem(R.id.calendar).isChecked = true
     }
+
 
     // Aktualizacja daty
     private fun updateLabel(myCalendar: Calendar) {

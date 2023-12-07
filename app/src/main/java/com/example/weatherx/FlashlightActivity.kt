@@ -54,6 +54,8 @@ class FlashlightActivity : AppCompatActivity() {
                 else -> false
             }
         }
+
+        bottomNavigationView.menu.findItem(R.id.flashlight).isChecked = true
     }
 
     // Metoda do włączania/wyłączania latarki
