@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
-import com.example.weatherx.Calendar.CalendarActivity
 import com.example.weatherx.Compass.CompassActivity
 
 class HomeActivity : AppCompatActivity() {
@@ -31,7 +30,7 @@ class HomeActivity : AppCompatActivity() {
                 return true
             }
             R.id.compass->{
-                startActivity(Intent(this,CompassActivity::class.java))
+                startActivity(Intent(this, CompassActivity::class.java))
                 return true
             }
             R.id.flashlight->{

@@ -7,12 +7,6 @@
     >
 
 
-    <com.example.weatherx.Compass.CompassView
-        android:id="@+id/compassView"
-        android:layout_centerInParent="true"
-        android:layout_width="300dp"
-        android:layout_height="300dp"
-        />
 
     <include layout="@layout/bottom_navigation" />
 </RelativeLayout>

@@ -1,5 +1,6 @@
 package com.example.weatherx
 
+
 import android.content.Intent
 import android.os.AsyncTask
 import android.os.Bundle
@@ -9,7 +10,6 @@ import android.widget.ProgressBar
 import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import com.example.weatherx.Calendar.CalendarActivity
 import com.example.weatherx.Compass.CompassActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import org.json.JSONObject
@@ -38,7 +38,7 @@ class MainActivity2 : AppCompatActivity() {
                     // Obsługa kliknięcia na elemencie "Home"
                     true
                 }
-                R.id.calendar -> {
+                R.id.calendar->{
                     startActivity(Intent(this, CalendarActivity::class.java))
                     true
                 }

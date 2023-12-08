@@ -8,11 +8,10 @@ import android.hardware.SensorEventListener
 import android.hardware.SensorManager
 import android.os.Bundle
 import android.view.MenuItem
-import android.view.animation.AnimationUtils
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.example.weatherx.Calendar.CalendarActivity
+import com.example.weatherx.CalendarActivity
 import com.example.weatherx.FlashlightActivity
 import com.example.weatherx.MainActivity2
 import com.example.weatherx.R
@@ -22,25 +21,32 @@ class CompassActivity : AppCompatActivity(), SensorEventListener {
 
     private lateinit var sensorManager: SensorManager
     private var magnetometer: Sensor? = null
+    private var accelerometer: Sensor? = null
     private lateinit var compass: ImageView
     private lateinit var bottomNavigationView: BottomNavigationView
+
+    private val ALPHA = 0.97f
+    private var azimuth: Float = 0.0f
+    private val gravity = FloatArray(3)
+    private val geomagnetic = FloatArray(3)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.compass_view)
 
-        // Inicjalizacja sensorów
         sensorManager = getSystemService(Context.SENSOR_SERVICE) as SensorManager
         magnetometer = sensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD)
+        accelerometer = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER)
 
-        // Sprawdzenie czy telefon ma wbudowany sensor
-        if (magnetometer == null) {
-            Toast.makeText(this, "Brak sensora kompasu na tym urządzeniu.", Toast.LENGTH_SHORT).show()
+        if (magnetometer == null || accelerometer == null) {
+            Toast.makeText(this, "Brak odpowiednich sensorów na tym urządzeniu.", Toast.LENGTH_SHORT).show()
+            finish()
+        } else {
+            sensorManager.registerListener(this, magnetometer, SensorManager.SENSOR_DELAY_NORMAL)
+            sensorManager.registerListener(this, accelerometer, SensorManager.SENSOR_DELAY_NORMAL)
         }
 
         compass = findViewById(R.id.compass)
-
-        sensorManager.registerListener(this, magnetometer, SensorManager.SENSOR_DELAY_NORMAL)
 
         bottomNavigationView = findViewById(R.id.bottom_navigation)
 
@@ -55,7 +61,6 @@ class CompassActivity : AppCompatActivity(), SensorEventListener {
                     true
                 }
                 R.id.compass -> {
-                    // Jestes w opcji kompasu
                     true
                 }
                 R.id.flashlight -> {
@@ -69,20 +74,31 @@ class CompassActivity : AppCompatActivity(), SensorEventListener {
         bottomNavigationView.menu.findItem(R.id.compass).isChecked = true
     }
 
-
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
+            // Obsługa innych elementów menu
         }
         return super.onOptionsItemSelected(item)
     }
 
     override fun onSensorChanged(event: SensorEvent) {
-        if (event.sensor == magnetometer) {
-            val azimuth = Math.toDegrees(event.values[0].toDouble()).toFloat()
-            val rotateAnimation = AnimationUtils.loadAnimation(this, R.anim.rotation_animation)
+        if (event.sensor.type == Sensor.TYPE_ACCELEROMETER) {
+            System.arraycopy(event.values, 0, gravity, 0, 3)
+        } else if (event.sensor.type == Sensor.TYPE_MAGNETIC_FIELD) {
+            System.arraycopy(event.values, 0, geomagnetic, 0, 3)
+        }
 
-            compass.startAnimation(rotateAnimation)
-            rotateAnimation.fillAfter = true
+        val rotationMatrix = FloatArray(9)
+        val success = SensorManager.getRotationMatrix(rotationMatrix, null, gravity, geomagnetic)
+
+        if (success) {
+            val orientationValues = FloatArray(3)
+            SensorManager.getOrientation(rotationMatrix, orientationValues)
+
+            azimuth = orientationValues[0]
+            azimuth = Math.toDegrees(azimuth.toDouble()).toFloat()
+            azimuth = (azimuth + 360) % 360
+
             compass.rotation = -azimuth
         }
     }
@@ -94,6 +110,7 @@ class CompassActivity : AppCompatActivity(), SensorEventListener {
     override fun onResume() {
         super.onResume()
         sensorManager.registerListener(this, magnetometer, SensorManager.SENSOR_DELAY_NORMAL)
+        sensorManager.registerListener(this, accelerometer, SensorManager.SENSOR_DELAY_NORMAL)
     }
 
     override fun onPause() {
@@ -101,4 +118,3 @@ class CompassActivity : AppCompatActivity(), SensorEventListener {
         sensorManager.unregisterListener(this)
     }
 }
-

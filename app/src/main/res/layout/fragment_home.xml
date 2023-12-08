@@ -136,7 +136,7 @@
                     </Space>
                     <TextView
                         android:textSize="12sp"
-                        android:text="Wschód słońca"
+                        android:text="Sunrise"
                         android:textColor="#FFF"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content">
@@ -179,7 +179,7 @@
                     </Space>
                     <TextView
                         android:textSize="12sp"
-                        android:text="Zachód Słońca"
+                        android:text="Sunset"
                         android:textColor="#FFF"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content">
@@ -222,7 +222,7 @@
                     </Space>
                     <TextView
                         android:textSize="12sp"
-                        android:text="Wiatr"
+                        android:text="Wind"
                         android:textColor="#FFF"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content">
@@ -278,7 +278,7 @@
                     </Space>
                     <TextView
                         android:textSize="12sp"
-                        android:text="Cisnienie"
+                        android:text="Pressure"
                         android:textColor="#FFF"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content">
@@ -321,7 +321,7 @@
                     </Space>
                     <TextView
                         android:textSize="12sp"
-                        android:text="Opady"
+                        android:text="Humidity"
                         android:textColor="#FFF"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content">
@@ -364,7 +364,7 @@
                     </Space>
                     <TextView
                         android:textSize="12sp"
-                        android:text="Kacper"
+                        android:text="Author"
                         android:textColor="#FFF"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content">
@@ -373,7 +373,7 @@
                     <TextView
                         android:id="@+id/info"
                         android:textSize="14sp"
-                        android:text="Jochymek"
+                        android:text="K. Jochymek"
                         android:textColor="#FFF"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content">

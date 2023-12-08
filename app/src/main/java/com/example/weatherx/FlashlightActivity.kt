@@ -11,7 +11,6 @@ import android.widget.ImageButton
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
-import com.example.weatherx.Calendar.CalendarActivity
 import com.example.weatherx.Compass.CompassActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
 

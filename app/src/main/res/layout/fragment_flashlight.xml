@@ -18,7 +18,7 @@
         android:gravity="center">
 
         <TextView
-            android:text="@string/latarka"
+            android:text="Flashlight"
             android:gravity="center"
             android:layout_gravity="center"
             android:layout_margin="25dp"
