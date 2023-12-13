@@ -27,7 +27,7 @@ class MainActivity : AppCompatActivity() {
 
             if (username == "admin" && password == "admin") {
                 // Poprawne logowanie
-                val intent = Intent(this, MainActivity2::class.java)
+                val intent = Intent(this, ChooseCityActivity::class.java)
                 startActivity(intent)
                 finish()
             } else {

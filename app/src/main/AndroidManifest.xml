@@ -44,6 +44,8 @@
         <activity android:name="com.example.weatherx.Compass.CompassActivity" />
         <activity android:name="com.example.weatherx.FlashlightActivity" />
         <activity android:name="com.example.weatherx.MainActivity2" />
+        <activity android:name="com.example.weatherx.ChooseCityActivity" />
+
     </application>
 
 </manifest>

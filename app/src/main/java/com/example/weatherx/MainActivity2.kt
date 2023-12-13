@@ -21,7 +21,7 @@ import java.util.Locale
 class MainActivity2 : AppCompatActivity() {
 
     // Podpięcie pod API
-    val CITY: String = "Rzeszów, pl"
+    var CITY: String = "Rzeszów, pl"
     val API: String = "06c921750b9a82d8f5d1294e1586276f"
 
     lateinit var bottomNavigationView: BottomNavigationView
@@ -56,6 +56,13 @@ class MainActivity2 : AppCompatActivity() {
 
         // Ustawienie aktywnej ikony
         bottomNavigationView.menu.findItem(R.id.home).isChecked = true
+
+        val selectedCity = intent.getStringExtra("selectedCity")
+
+        // Ustaw wybrane miasto w miejscu CITY
+        if (!selectedCity.isNullOrEmpty()) {
+            CITY = selectedCity
+        }
 
         weatherTask().execute()
     }
