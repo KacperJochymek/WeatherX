@@ -21,10 +21,12 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class CalendarActivity : AppCompatActivity(), SensorEventListener {
 
+
     private var sensorManager: SensorManager? = null
     private var running = false
-
+    private var lastSteps = 0f
     private var totalSteps = 0f
+    private var lastResetTime = System.currentTimeMillis()
 
     val ACTIVITY_RECOGNITION_REQUEST_CODE = 100
 
@@ -47,7 +49,6 @@ class CalendarActivity : AppCompatActivity(), SensorEventListener {
                     true
                 }
                 R.id.calendar -> {
-                    // Jesteś w sekcji Kalendarza
                     true
                 }
                 R.id.compass -> {
@@ -62,12 +63,18 @@ class CalendarActivity : AppCompatActivity(), SensorEventListener {
             }
         }
 
-        // Ustawienie aktywnej ikony
         bottomNavigationView.menu.findItem(R.id.calendar).isChecked = true
+
+        var tv_stepsTaken = findViewById<TextView>(R.id.tv_stepsTaken)
+
+        tv_stepsTaken.setOnLongClickListener {
+            resetStepCounter()
+            true
+        }
     }
 
+    //Sprawdzenie czy na urządzeniu jest sensor + usuwanie listenera
     override fun onResume() {
-
         super.onResume()
         running = true
 
@@ -76,6 +83,7 @@ class CalendarActivity : AppCompatActivity(), SensorEventListener {
         if (stepSensor == null) {
             Toast.makeText(this, "Brak sensora, na tym urządzeniu.", Toast.LENGTH_SHORT).show()
         } else {
+            sensorManager?.unregisterListener(this) // Usuwamy poprzedniego listenera
             sensorManager?.registerListener(this, stepSensor, SensorManager.SENSOR_DELAY_UI)
         }
     }
@@ -87,20 +95,27 @@ class CalendarActivity : AppCompatActivity(), SensorEventListener {
     }
 
     override fun onSensorChanged(event: SensorEvent?) {
-
         var tv_stepsTaken = findViewById<TextView>(R.id.tv_stepsTaken)
 
         if (running) {
             totalSteps = event!!.values[0]
 
-            val currentSteps = totalSteps.toInt()
+            val currentSteps = (totalSteps - lastSteps).toInt()
 
             tv_stepsTaken.text = ("$currentSteps")
         }
     }
 
     override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {
+        // Ignore
+    }
 
+    private fun resetStepCounter() {
+        lastResetTime = System.currentTimeMillis()
+        lastSteps = totalSteps
+        var tv_stepsTaken = findViewById<TextView>(R.id.tv_stepsTaken)
+        tv_stepsTaken.text = "0"
+        Toast.makeText(this, "Pomyślnie zresetowano licznik", Toast.LENGTH_SHORT).show()
     }
 
     private fun requestPermission() {
@@ -135,6 +150,5 @@ class CalendarActivity : AppCompatActivity(), SensorEventListener {
                 }
             }
         }
-
     }
 }
