@@ -24,7 +24,7 @@ class ChooseCityActivity : AppCompatActivity() {
             val selectedCity = etCity.text.toString().trim()
 
             if (selectedCity.isNotEmpty()) {
-                // Zapisz wybrane miasto w SharedPreferences
+                // Zapisz wybrane miasto w SharedPreferences (przy zmianie aktywności, żeby zostawało)
                 val sharedPreferences = getSharedPreferences("WeatherPreferences", Context.MODE_PRIVATE)
                 val editor = sharedPreferences.edit()
                 editor.putString("selectedCity", selectedCity)

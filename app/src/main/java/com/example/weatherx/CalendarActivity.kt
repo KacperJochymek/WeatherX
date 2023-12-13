@@ -110,6 +110,8 @@ class CalendarActivity : AppCompatActivity(), SensorEventListener {
         // Ignore
     }
 
+
+    // Zresetowanie licznika kroków
     private fun resetStepCounter() {
         lastResetTime = System.currentTimeMillis()
         lastSteps = totalSteps

@@ -34,10 +34,14 @@ class CompassActivity : AppCompatActivity(), SensorEventListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.compass_view)
 
+
+        //Inicjalizacja sensorów akcelerometru i magnetometru
         sensorManager = getSystemService(Context.SENSOR_SERVICE) as SensorManager
         magnetometer = sensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD)
         accelerometer = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER)
 
+
+        // Sprawdzenie dostępności sensorów na urządzeniu
         if (magnetometer == null || accelerometer == null) {
             Toast.makeText(this, "Brak odpowiednich sensorów na tym urządzeniu.", Toast.LENGTH_SHORT).show()
             finish()
@@ -71,6 +75,7 @@ class CompassActivity : AppCompatActivity(), SensorEventListener {
             }
         }
 
+        //zaznaczenie na menu, gdzie jesteśmy
         bottomNavigationView.menu.findItem(R.id.compass).isChecked = true
     }
 
@@ -82,12 +87,14 @@ class CompassActivity : AppCompatActivity(), SensorEventListener {
     }
 
     override fun onSensorChanged(event: SensorEvent) {
+        // Obsługa zdarzenia zmiany danych z sensorów
         if (event.sensor.type == Sensor.TYPE_ACCELEROMETER) {
             System.arraycopy(event.values, 0, gravity, 0, 3)
         } else if (event.sensor.type == Sensor.TYPE_MAGNETIC_FIELD) {
             System.arraycopy(event.values, 0, geomagnetic, 0, 3)
         }
 
+        // Obliczenia kierunku (azymutu) i aktualizacja widoku kompasu
         val rotationMatrix = FloatArray(9)
         val success = SensorManager.getRotationMatrix(rotationMatrix, null, gravity, geomagnetic)
 
@@ -107,6 +114,7 @@ class CompassActivity : AppCompatActivity(), SensorEventListener {
         // Dokładność sensora
     }
 
+    // Rejestracja nasłuchiwacza przy wznowieniu aktywności
     override fun onResume() {
         super.onResume()
         sensorManager.registerListener(this, magnetometer, SensorManager.SENSOR_DELAY_NORMAL)
