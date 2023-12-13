@@ -1,6 +1,7 @@
 package com.example.weatherx
 
 
+import android.content.Context
 import android.content.Intent
 import android.os.AsyncTask
 import android.os.Bundle
@@ -57,7 +58,8 @@ class MainActivity2 : AppCompatActivity() {
         // Ustawienie aktywnej ikony
         bottomNavigationView.menu.findItem(R.id.home).isChecked = true
 
-        val selectedCity = intent.getStringExtra("selectedCity")
+        val sharedPreferences = getSharedPreferences("WeatherPreferences", Context.MODE_PRIVATE)
+        val selectedCity = sharedPreferences.getString("selectedCity", "")
 
         // Ustaw wybrane miasto w miejscu CITY
         if (!selectedCity.isNullOrEmpty()) {

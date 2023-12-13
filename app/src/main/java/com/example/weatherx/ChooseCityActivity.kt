@@ -1,5 +1,6 @@
 package com.example.weatherx
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
@@ -23,9 +24,14 @@ class ChooseCityActivity : AppCompatActivity() {
             val selectedCity = etCity.text.toString().trim()
 
             if (selectedCity.isNotEmpty()) {
+                // Zapisz wybrane miasto w SharedPreferences
+                val sharedPreferences = getSharedPreferences("WeatherPreferences", Context.MODE_PRIVATE)
+                val editor = sharedPreferences.edit()
+                editor.putString("selectedCity", selectedCity)
+                editor.apply()
+
                 // Przekazanie wybranego miasta do MainActivity2
                 val intent = Intent(this, MainActivity2::class.java)
-                intent.putExtra("selectedCity", selectedCity)
                 startActivity(intent)
                 finish()
             } else {
