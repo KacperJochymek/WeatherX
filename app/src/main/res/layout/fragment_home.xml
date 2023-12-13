@@ -83,6 +83,7 @@
                     android:id="@+id/temp_min"
                     android:text="Min temp"
                     android:textColor="#FFF"
+                    android:layout_marginLeft="50dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content">
                 </TextView>
@@ -349,7 +350,8 @@
                     android:padding="8dp"
                     android:background="#3CF1EBF1"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:onClick="onAuthorClick">
 
                     <ImageView
                         android:layout_width="25dp"

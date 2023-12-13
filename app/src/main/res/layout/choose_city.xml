@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".chooseCity">
+    tools:context=".ChooseCityActivity">
 
     <RelativeLayout
         android:layout_width="wrap_content"
@@ -24,7 +24,8 @@
             android:hint="Enter City"
             android:layout_marginTop="16dp"
             android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"/>
+            android:layout_marginRight="16dp"
+            android:gravity="center" />
 
         <Button
             android:id="@+id/btnSelectCity"

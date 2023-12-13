@@ -67,6 +67,11 @@ class MainActivity2 : AppCompatActivity() {
         weatherTask().execute()
     }
 
+    fun onAuthorClick(view: View) {
+        // Przełączanie na ChooseCityActivity
+        val intent = Intent(this, ChooseCityActivity::class.java)
+        startActivity(intent)
+    }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.bottom_nav, menu)
