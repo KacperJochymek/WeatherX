@@ -120,6 +120,7 @@ class CalendarActivity : AppCompatActivity(), SensorEventListener {
         Toast.makeText(this, "Pomyślnie zresetowano licznik", Toast.LENGTH_SHORT).show()
     }
 
+    //Metoda do uzyskania pozwolenia
     private fun requestPermission() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
             ActivityCompat.requestPermissions(
@@ -130,6 +131,7 @@ class CalendarActivity : AppCompatActivity(), SensorEventListener {
         }
     }
 
+    //Spr czy activity recognition jest w manifest
     private fun isPermissionGranted(): Boolean {
         return ContextCompat.checkSelfPermission(
             this,
@@ -137,6 +139,7 @@ class CalendarActivity : AppCompatActivity(), SensorEventListener {
         ) != PackageManager.PERMISSION_GRANTED
     }
 
+    //Obsługa odpowiedzi
     override fun onRequestPermissionsResult(
         requestCode: Int,
         permissions: Array<out String>,
